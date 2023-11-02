@@ -1,11 +1,11 @@
 import java.util.EmptyStackException;
 
 class Stack<T> {
-    class Node<t> {
-        private t data;
-        private Node<t> next;
+    class Node<Y> {
+        private Y data;
+        private Node<Y> next;
 
-        public Node(t data) {
+        public Node(Y data) {
             this.data = data;
         }
     }
