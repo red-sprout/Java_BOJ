@@ -1,1 +1,1 @@
-# IntelliJ_BOJ
+# BOJ Algorithms
