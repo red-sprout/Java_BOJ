@@ -43,5 +43,9 @@ public class SinglyLinkedList {
         head.append(3);
         head.append(4);
         head.retrieve();
+
+        head.delete(2);
+        head.delete(3);
+        head.retrieve();
     }
 }
