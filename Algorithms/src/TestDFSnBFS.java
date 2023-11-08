@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.Iterator;
 import java.util.Stack;
 import java.util.NoSuchElementException;
 
@@ -93,8 +92,10 @@ class Graph {
         while (!stack.isEmpty()) {
             Node r = stack.pop();
             for (Node n : r.adjacent) {
-                n.marked = true;
-                stack.push(n);
+                if (n.marked == false) {
+                    n.marked = true;
+                    stack.push(n);
+                }
             }
             visit(r);
         }
@@ -133,7 +134,7 @@ class Graph {
         dfsR(r);
     }
     void dfsR() {
-        dfs(0);
+        dfsR(0);
     }
     void visit(Node n) {
         System.out.print(n.data + " ");
@@ -153,6 +154,13 @@ public class TestDFSnBFS {
         g.addEdge(5,6);
         g.addEdge(5,7);
         g.addEdge(6,8);
-        g.dfs();
+        // g.dfs(); // 0 1 3 5 7 6 8 4 2
+        // System.out.println();
+        // g.dfs(3); // 3 5 7 6 8 4 2 1 0
+        // System.out.println();
+        // g.dfsR(); // 0 1 2 4 3 5 6 8 7
+        // System.out.println();
+        // g.dfsR(3); // 3 1 0 2 4 5 6 8 7
+        // System.out.println();
     }
 }
