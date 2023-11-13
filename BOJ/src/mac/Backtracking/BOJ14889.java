@@ -3,51 +3,67 @@ import java.io.*;
 import java.util.*;
 
 public class BOJ14889 {
-    static int result = 100000;
-    static int[] cases = new int[10];
-    static int sum_1 = 0;
-    static int sum_2 = 0;
+    static int ans = 1000001;
+    static boolean[] visited = new boolean[20];
 
-    static void dfs(int member, int idx) {
-        if (member/2 == idx) {
-            // dfs_cases(0);
+    static void dfs(int[][] S, int[] arr1, int[] arr2, int cnt, int N) {
+        if (N / 2 == cnt) {
+            int idx1 = 0, idx2 = 0;
+            for (int i = 0; i < N; i++) {
+                if (visited[i]) {
+                    arr1[idx1] = i;
+                    idx1++;
+                } else {
+                    arr2[idx2] = i;
+                    idx2++;
+                }
+            }
+            int tmp = Math.abs(sum(S, arr1, N) - sum(S, arr2, N));
+            if (ans > tmp) ans = tmp;
             return;
-        } else {
-            for (int i = idx; i <= member; i++) {
+        }
+        else {
+            for (int i = cnt; i < N; i++) {
                 boolean flag = true;
-                for (int j = 0; j < member/2; j++) {
-                    if (idx == cases[j]) {
+                for (int j = N-1; j >= 0; j--) {
+                    if (visited[j] && j > i) {
                         flag = false;
                         break;
                     }
                 }
-                if (flag) {
-                    cases[i] = idx;
-                    dfs(member, i + 1);
-                    cases[i] = 0;
+                if(!visited[i] && flag) {
+                    visited[i] = true;
+                    dfs(S, arr1, arr2, cnt + 1, N);
+                    visited[i] = false;
                 }
             }
         }
     }
-
-    static void dfs_cases(int member, int cnt) {
-        for (int i = 1; i <= member; i++) {
-            for (int j = 1; j <= member/2; j++) {
-
+    static int sum(int[][] S, int[] arr, int N) {
+        int tmp = 0;
+        for (int i : arr) {
+            for (int j : arr) {
+                tmp += S[i][j] + S[j][i];
             }
         }
+        return tmp;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(br.readLine());
         int[][] S = new int[N][N];
+        int[] arr1 = new int[N/2];
+        int[] arr2 = new int[N/2];
+
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N ; j++) {
                 S[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-
+        dfs(S, arr1, arr2, 0, N);
+        System.out.println(ans/2);
+        br.close();
     }
 }
