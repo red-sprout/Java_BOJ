@@ -25,28 +25,32 @@ public class BOJ2573 {
             }
         }
 
-        boolean flag;
-
         while (true) {
-            flag = true;
+            boolean flag = true;
             tmp = new int[N][K];
             visit = new boolean[N][K];
             flag = search(flag);
+
             if (flag) {
                 System.out.println(0);
                 break;
             }
+
             bfs();
+
             boolean flag2 = check();
+
             if (flag2) {
                 System.out.println(year);
                 break;
             }
+
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < K; j++) {
                     map[i][j] = tmp[i][j];
                 }
             }
+
             year++;
         }
         
@@ -57,14 +61,18 @@ public class BOJ2573 {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < K; j++) {
                 tmp[i][j] = map[i][j];
+
                 if (map[i][j] != 0) {
                     flag = false;
                     visit[i][j] = true;
                     int cnt = 0;
+
                     for (int k = 0; k < 4; k++) {
                         if (map[i + dr[k]][j + dc[k]] == 0) cnt++;
                     }
+
                     tmp[i][j] = map[i][j] - cnt > 0 ? map[i][j] - cnt : 0;
+
                     startRow = i;
                     startCol = j;
                 }
@@ -75,16 +83,21 @@ public class BOJ2573 {
 
     static void bfs() {
         Queue<int[]> q = new LinkedList<>();
+
         q.add(new int[] {startRow, startCol});
         visit[startRow][startCol] = false;
+
         while (!q.isEmpty()) {
             int[] cord = q.poll();
             int pastRow = cord[0];
             int pastCol = cord[1];
+
             for (int i = 0; i < 4; i++) {
                 int nowRow = pastRow + dr[i];
                 int nowCol = pastCol + dc[i];
+
                 if (!visit[nowRow][nowCol]) continue;
+                
                 q.add(new int[] {nowRow, nowCol});
                 visit[nowRow][nowCol] = false;
             }
