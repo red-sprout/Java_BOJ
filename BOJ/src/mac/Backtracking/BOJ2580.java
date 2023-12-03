@@ -10,14 +10,17 @@ public class BOJ2580 {
     static StringBuilder sb;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         sudoku = new int[9][9];
         zeroCord = new int[81][2];
 
         for(int i = 0; i < 9; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
+
             for(int j = 0 ; j < 9; j++) {
                 int num = Integer.parseInt(st.nextToken());
                 sudoku[i][j] = num;
+
                 if(num == 0) {    
                     zeroCord[totalZero][0] = i;
                     zeroCord[totalZero][1] = j;
@@ -29,9 +32,11 @@ public class BOJ2580 {
         dfs(0);
         br.close();
     }
+
     private static void dfs(int n){
         if (n == totalZero) {
             sb = new StringBuilder();
+
             for(int i = 0; i < 9; i++) {
                 for(int j = 0; j < 9; j++) {
                     sb.append(String.valueOf(sudoku[i][j]));
@@ -39,11 +44,13 @@ public class BOJ2580 {
                 }
                 sb.append("\n");
             }
+
             System.out.print(sb);
             System.exit(0);
         } else {
             int row = zeroCord[n][0];
             int col = zeroCord[n][1];
+
             for(int i = 1; i <= 9; i++) {
                 if(check(row, col, i) && sudoku[row][col] == 0) {
                     sudoku[row][col] = i;
