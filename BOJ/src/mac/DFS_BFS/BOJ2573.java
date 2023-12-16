@@ -10,6 +10,7 @@ public class BOJ2573 {
     static int[] dr = {-1,1,0,0};
     static int[] dc = {0,0,-1,1};
     static boolean[][] visit;
+    
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
