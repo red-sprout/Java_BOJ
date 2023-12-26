@@ -20,6 +20,7 @@
 ## Java 에서의 java.util.PriorityQueue
 - 출처: https://velog.io/@gillog/Java-Priority-Queue우선-순위-큐
 - 우선순위 큐에 저장할 객체는 필수적으로 Comparable Interface를 구현
+- Comparable Interface를 구현하면 compareTo method를 override 하게 되고 해당 객체에서 처리할 우선순위 조건을 리턴해주면 PriorityQueue 가 알아서 우선순위가 높은 객체를 추출
 - 선언
 ```java
 import java.util.PriorityQueue;
