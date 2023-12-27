@@ -96,3 +96,20 @@ class T implements Comparable<T> {
     }
 }
 ```
+- Priority Queue에 적용
+```java
+public static void main(String[] args) {
+
+        PriorityQueue<T> priorityQueue = new PriorityQueue<>();
+
+        priorityQueue.add(new T(3650, "10년후 글"));
+        priorityQueue.add(new T(31, "한달 후 글"));
+        priorityQueue.add(new T(1, "첫번째 글"));
+        priorityQueue.add(new T(365, "1년후 글"));
+
+        while (!priorityQueue.isEmpty()) {
+            T t = priorityQueue.poll();
+            System.out.println("글 넘버 : " + t.getWriteRowNumber() + " 글 내용 : " + t.getContent());
+        }
+    }
+```
